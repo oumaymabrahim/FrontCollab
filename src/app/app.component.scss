@@ -1,0 +1,8 @@
+// Importation des variables
+@import 'src/styles/variables';
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: $background-color;
+}

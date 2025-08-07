@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: $background-color;
+  color: $text-primary;
+  line-height: 1.6;
+}
+
+// Utilitaires
+.text-primary { color: $primary-color; }
+.text-secondary { color: $text-secondary; }
+.text-success { color: $success-color; }
+.text-warning { color: $warning-color; }
+.text-error { color: $error-color; }
+
+.btn {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &.btn-primary {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: $primary-dark;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $text-secondary;
+    color: white;
+
+    &:hover {
+      background-color: darken($text-secondary, 10%);
+    }
+  }
+}
+
+.card {
+  background: $surface-color;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+}
+
+// Classes utilitaires pour les rôles
+.role-admin { border-left: 4px solid $error-color; }
+.role-chef { border-left: 4px solid $warning-color; }
+.role-membre { border-left: 4px solid $info-color; }
+
+// Statuts des tâches
+.statut-en-attente {
+  background-color: rgba($warning-color, 0.1);
+  color: $warning-color;
+}
+.statut-en-cours {
+  background-color: rgba($info-color, 0.1);
+  color: $info-color;
+}
+.statut-terminee {
+  background-color: rgba($success-color, 0.1);
+  color: $success-color;
+}
+
+// Responsive
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 $spacing-sm;
+  }
+}
+
+
+  // Classes d'icônes utilisant Feather Icons
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+
+  // Icônes communes
+  &.icon-dashboard::before { content: "📊"; }
+  &.icon-people::before { content: "👥"; }
+  &.icon-folder::before { content: "📁"; }
+  &.icon-task::before { content: "✓"; }
+  &.icon-user::before { content: "👤"; }
+  &.icon-plus::before { content: "+"; }
+  &.icon-search::before { content: "🔍"; }
+  &.icon-refresh::before { content: "🔄"; }
+  &.icon-delete::before { content: "🗑️"; }
+  &.icon-edit::before { content: "✏️"; }
+  &.icon-eye::before { content: "👁️"; }
+  &.icon-calendar::before { content: "📅"; }
+  &.icon-clock::before { content: "⏰"; }
+  &.icon-money::before { content: "💰"; }
+  &.icon-check::before { content: "✅"; }
+  &.icon-error::before { content: "❌"; }
+  &.icon-info::before { content: "ℹ️"; }
+  &.icon-star::before { content: "⭐"; }
+  &.icon-menu::before { content: "☰"; }
+  &.icon-close::before { content: "✕"; }
+  &.icon-logout::before { content: "🚪"; }
+  &.icon-chevron-left::before { content: "◀"; }
+  &.icon-chevron-right::before { content: "▶"; }
+  &.icon-archive::before { content: "📦"; }
+}
+

@@ -1,0 +1,27 @@
+<div class="layout-container membre-layout">
+  <app-navbar></app-navbar>
+
+  <div class="layout-content">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Membre d'équipe</h3>
+        <p>Gestion de vos tâches</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a routerLink="/membre/dashboard" routerLinkActive="active" class="nav-item">
+          <i class="icon icon-dashboard"></i>
+          Tableau de bord
+        </a>
+        <a routerLink="/membre/mes-taches" routerLinkActive="active" class="nav-item">
+          <i class="icon icon-task"></i>
+          Mes tâches
+        </a>
+      </nav>
+    </div>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

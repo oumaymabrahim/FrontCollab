@@ -1,0 +1,102 @@
+<div class="create-user-container">
+  <div class="page-header">
+    <h1>Créer un nouvel utilisateur</h1>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <!-- Nom -->
+      <div class="form-group">
+        <label for="nom">Nom complet *</label>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          class="form-control"
+          [class.error]="getFieldError('nom')"
+          placeholder="Nom complet de l'utilisateur"
+        />
+        <div class="error-message" *ngIf="getFieldError('nom')">
+          {{ getFieldError('nom') }}
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.error]="getFieldError('email')"
+          placeholder="email@exemple.com"
+        />
+        <div class="error-message" *ngIf="getFieldError('email')">
+          {{ getFieldError('email') }}
+        </div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="form-group">
+        <label for="motDePasse">Mot de passe *</label>
+        <input
+          type="password"
+          id="motDePasse"
+          formControlName="motDePasse"
+          class="form-control"
+          [class.error]="getFieldError('motDePasse')"
+          placeholder="Minimum 6 caractères"
+        />
+        <div class="error-message" *ngIf="getFieldError('motDePasse')">
+          {{ getFieldError('motDePasse') }}
+        </div>
+      </div>
+
+      <!-- Rôle -->
+      <div class="form-group">
+        <label for="role">Rôle *</label>
+        <select
+          id="role"
+          formControlName="role"
+          class="form-control"
+          [class.error]="getFieldError('role')"
+        >
+          <option [value]="Role.MEMBRE_EQUIPE">{{ getRoleLabel(Role.MEMBRE_EQUIPE) }}</option>
+          <option [value]="Role.CHEF_DE_PROJECT">{{ getRoleLabel(Role.CHEF_DE_PROJECT) }}</option>
+          <option [value]="Role.ADMIN">{{ getRoleLabel(Role.ADMIN) }}</option>
+        </select>
+        <div class="error-message" *ngIf="getFieldError('role')">
+          {{ getFieldError('role') }}
+        </div>
+      </div>
+
+      <!-- Erreur générale -->
+      <div class="error-message global-error" *ngIf="error">
+        <i class="icon icon-error"></i>
+        {{ error }}
+      </div>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="cancel()"
+          [disabled]="loading"
+        >
+          Annuler
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="loading || userForm.invalid"
+        >
+          <app-loading size="small" *ngIf="loading"></app-loading>
+          <span *ngIf="!loading">Créer l'utilisateur</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

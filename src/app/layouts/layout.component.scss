@@ -1,0 +1,104 @@
+
+@import '../../styles/variables';
+
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &.admin-layout {
+    .sidebar-header {
+      background: linear-gradient(135deg, $error-color, darken($error-color, 10%));
+    }
+  }
+
+  &.chef-layout {
+    .sidebar-header {
+      background: linear-gradient(135deg, $warning-color, darken($warning-color, 10%));
+    }
+  }
+
+  &.membre-layout {
+    .sidebar-header {
+      background: linear-gradient(135deg, $info-color, darken($info-color, 10%));
+    }
+  }
+
+  .layout-content {
+    display: flex;
+    flex: 1;
+
+    .sidebar {
+      width: 280px;
+      background: $surface-color;
+      border-right: 1px solid $border-color;
+      box-shadow: $shadow-sm;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+
+      .sidebar-header {
+        padding: $spacing-lg;
+        color: white;
+        text-align: center;
+
+        h3 {
+          margin: 0 0 $spacing-xs 0;
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+
+        p {
+          margin: 0;
+          font-size: 0.875rem;
+          opacity: 0.9;
+        }
+      }
+
+      .sidebar-nav {
+        padding: $spacing-md 0;
+
+        .nav-item {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          padding: $spacing-md $spacing-lg;
+          color: $text-secondary;
+          text-decoration: none;
+          transition: all 0.2s;
+          border-left: 3px solid transparent;
+
+          &:hover {
+            background: rgba($primary-color, 0.05);
+            color: $primary-color;
+          }
+
+          &.active {
+            background: rgba($primary-color, 0.1);
+            color: $primary-color;
+            border-left-color: $primary-color;
+            font-weight: 500;
+          }
+
+          .icon {
+            font-size: 1.1rem;
+            width: 20px;
+          }
+        }
+      }
+    }
+
+    .main-content {
+      flex: 1;
+      padding: $spacing-lg;
+      background: $background-color;
+      overflow-x: auto;
+
+      @media (max-width: 768px) {
+        padding: $spacing-md;
+      }
+    }
+  }
+}
+

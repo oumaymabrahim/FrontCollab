@@ -1,0 +1,32 @@
+<div class="layout-container admin-layout">
+  <app-navbar></app-navbar>
+
+  <div class="layout-content">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Administration</h3>
+        <p>Gestion complète du système</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-item">
+          <i class="icon icon-dashboard"></i>
+          Tableau de bord
+        </a>
+        <a routerLink="/admin/users" routerLinkActive="active" class="nav-item">
+          <i class="icon icon-people"></i>
+          Utilisateurs
+        </a>
+        <a routerLink="/admin/projets" routerLinkActive="active" class="nav-item">
+          <i class="icon icon-folder"></i>
+          Projets
+        </a>
+      </nav>
+    </div>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+

@@ -1,0 +1,275 @@
+
+@import '../../../../styles/variables';
+
+.users-container {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xl;
+
+    h1 {
+      margin: 0;
+      color: $text-primary;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: $spacing-md;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: $spacing-md;
+      align-items: stretch;
+    }
+  }
+
+  .filters-section {
+    background: $surface-color;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    box-shadow: $shadow-sm;
+
+    .filters-row {
+      display: flex;
+      gap: $spacing-md;
+      align-items: center;
+      margin-bottom: $spacing-md;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-group {
+        position: relative;
+        flex: 1;
+
+        .search-input {
+          width: 100%;
+          padding: $spacing-sm $spacing-md $spacing-sm 40px;
+          border: 2px solid $border-color;
+          border-radius: $border-radius-md;
+          font-size: 1rem;
+
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+          }
+        }
+
+        .search-icon {
+          position: absolute;
+          left: $spacing-sm;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $text-secondary;
+        }
+      }
+
+      .role-select {
+        padding: $spacing-sm $spacing-md;
+        border: 2px solid $border-color;
+        border-radius: $border-radius-md;
+        font-size: 1rem;
+        min-width: 200px;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+        }
+      }
+    }
+
+    .results-info {
+      color: $text-secondary;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+
+  .users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .user-card {
+      background: $surface-color;
+      border-radius: $border-radius-lg;
+      padding: $spacing-lg;
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      box-shadow: $shadow-md;
+      border-left: 4px solid transparent;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+      }
+
+      &.role-chef {
+        border-left-color: $warning-color;
+      }
+
+      &.role-membre {
+        border-left-color: $info-color;
+      }
+
+      .user-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, $primary-color, $primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .user-info {
+        flex: 1;
+
+        h3 {
+          margin: 0 0 $spacing-xs 0;
+          color: $text-primary;
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+
+        .user-email {
+          margin: 0 0 $spacing-sm 0;
+          color: $text-secondary;
+          font-size: 0.875rem;
+        }
+
+        .user-role {
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius-sm;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+
+          &.role-admin {
+            background: rgba($error-color, 0.1);
+            color: $error-color;
+          }
+
+          &.role-chef {
+            background: rgba($warning-color, 0.1);
+            color: $warning-color;
+          }
+
+          &.role-membre {
+            background: rgba($info-color, 0.1);
+            color: $info-color;
+          }
+        }
+      }
+
+      .user-actions {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+        align-items: flex-end;
+
+        .role-change-select {
+          padding: $spacing-xs $spacing-sm;
+          border: 1px solid $border-color;
+          border-radius: $border-radius-sm;
+          font-size: 0.875rem;
+          min-width: 140px;
+
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+          }
+        }
+
+        .btn-sm {
+          padding: $spacing-xs $spacing-sm;
+          font-size: 0.875rem;
+
+          .icon {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $text-secondary;
+
+    .icon {
+      font-size: 4rem;
+      margin-bottom: $spacing-lg;
+      opacity: 0.5;
+    }
+
+    h3 {
+      margin: 0 0 $spacing-sm 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+
+    .page-info {
+      color: $text-secondary;
+      font-weight: 500;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .error-message {
+    background: rgba($error-color, 0.1);
+    color: $error-color;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+
+    .icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+

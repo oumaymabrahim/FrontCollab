@@ -1,0 +1,154 @@
+<div class="projets-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Gestion des projets</h1>
+    <div class="header-actions" *ngIf="isAdmin">
+      <button class="btn btn-primary">
+        <i class="icon icon-plus"></i>
+        Nouveau projet
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="filters-section">
+    <div class="filters-row">
+      <div class="search-group">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="applyFilters()"
+          placeholder="Rechercher par nom ou description..."
+          class="search-input"
+        />
+        <i class="icon icon-search search-icon"></i>
+      </div>
+
+      <select
+        [(ngModel)]="selectedStatut"
+        (change)="applyFilters()"
+        class="statut-select"
+      >
+        <option value="">Tous les statuts</option>
+        <option [value]="StatutProjet.PLANIFIE">{{ getStatutLabel(StatutProjet.PLANIFIE) }}</option>
+        <option [value]="StatutProjet.EN_COURS">{{ getStatutLabel(StatutProjet.EN_COURS) }}</option>
+        <option [value]="StatutProjet.TERMINE">{{ getStatutLabel(StatutProjet.TERMINE) }}</option>
+        <option [value]="StatutProjet.SUSPENDU">{{ getStatutLabel(StatutProjet.SUSPENDU) }}</option>
+        <option [value]="StatutProjet.ANNULE">{{ getStatutLabel(StatutProjet.ANNULE) }}</option>
+      </select>
+
+      <button class="btn btn-secondary" (click)="resetFilters()">
+        <i class="icon icon-refresh"></i>
+        Réinitialiser
+      </button>
+    </div>
+
+    <div class="results-info">
+      {{ filteredProjets.length }} projet(s) trouvé(s)
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <app-loading *ngIf="loading" message="Chargement des projets..."></app-loading>
+
+  <!-- Erreur -->
+  <div class="error-message" *ngIf="error">
+    <i class="icon icon-error"></i>
+    {{ error }}
+  </div>
+
+  <!-- Grille des projets -->
+  <div class="projets-grid" *ngIf="!loading && !error">
+    <div class="projet-card" *ngFor="let projet of getPaginatedProjets()">
+      <!-- Header de la carte -->
+      <div class="card-header">
+        <h3>{{ projet.nom }}</h3>
+        <span class="projet-statut" [ngClass]="getStatutClass(projet.statut)">
+          {{ getStatutLabel(projet.statut) }}
+        </span>
+      </div>
+
+      <!-- Contenu de la carte -->
+      <div class="card-content">
+        <p class="projet-description" *ngIf="projet.description">
+          {{ projet.description }}
+        </p>
+
+        <div class="projet-dates">
+          <div class="date-item">
+            <i class="icon icon-calendar"></i>
+            <span>Créé le {{ formatDate(projet.dateCreation) }}</span>
+          </div>
+          <div class="date-item" [ngClass]="{ 'urgent': isEcheanceProche(projet.dateEcheance) }">
+            <i class="icon icon-clock"></i>
+            <span>
+              Échéance: {{ formatDate(projet.dateEcheance) }}
+              <span class="days-remaining" *ngIf="getDaysRemaining(projet.dateEcheance) > 0">
+                ({{ getDaysRemaining(projet.dateEcheance) }} jours)
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="projet-budget" *ngIf="projet.budget">
+          <i class="icon icon-money"></i>
+          <span>Budget: {{ projet.budget | currency:'EUR':'symbol':'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="card-actions">
+        <button class="btn btn-primary btn-sm" title="Voir les détails">
+          <i class="icon icon-eye"></i>
+          Détails
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          *ngIf="isAdmin"
+          (click)="deleteProjet(projet)"
+          title="Supprimer le projet"
+        >
+          <i class="icon icon-delete"></i>
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun projet -->
+  <div class="empty-state" *ngIf="!loading && !error && filteredProjets.length === 0">
+    <i class="icon icon-folder"></i>
+    <h3>Aucun projet trouvé</h3>
+    <p>Aucun projet ne correspond à vos critères de recherche.</p>
+    <button class="btn btn-primary" *ngIf="isAdmin">
+      <i class="icon icon-plus"></i>
+      Créer le premier projet
+    </button>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button
+      class="btn btn-secondary"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      <i class="icon icon-chevron-left"></i>
+      Précédent
+    </button>
+
+    <span class="page-info">
+      Page {{ currentPage }} sur {{ totalPages }}
+    </span>
+
+    <button
+      class="btn btn-secondary"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
+      Suivant
+      <i class="icon icon-chevron-right"></i>
+    </button>
+  </div>
+</div>
+

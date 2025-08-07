@@ -1,0 +1,196 @@
+// shared/components/navbar/navbar.component.scss
+
+@import '../../../../styles/variables';
+
+.navbar {
+  background: $surface-color;
+  border-bottom: 1px solid $border-color;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  &.role-admin {
+    border-bottom-color: $error-color;
+  }
+
+  &.role-chef {
+    border-bottom-color: $warning-color;
+  }
+
+  &.role-membre {
+    border-bottom-color: $info-color;
+  }
+
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md 0;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    .brand-title {
+      color: $primary-color;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .user-role {
+      background: $primary-light;
+      color: white;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+  }
+
+  .desktop-menu {
+    display: flex;
+    gap: $spacing-md;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-sm $spacing-md;
+      color: $text-secondary;
+      text-decoration: none;
+      border-radius: $border-radius-md;
+      transition: all 0.2s;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        background: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+
+      .icon {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .navbar-user {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .user-name {
+        font-weight: 600;
+        color: $text-primary;
+      }
+
+      .user-email {
+        font-size: 0.875rem;
+        color: $text-secondary;
+      }
+    }
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    padding: $spacing-sm;
+    cursor: pointer;
+    color: $text-primary;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $surface-color;
+    border-bottom: 1px solid $border-color;
+    box-shadow: $shadow-md;
+
+    @media (max-width: 768px) {
+      display: block;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+
+      &.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-md;
+      color: $text-primary;
+      text-decoration: none;
+      border-bottom: 1px solid $border-color;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+
+      .icon {
+        font-size: 1.1rem;
+        width: 20px;
+      }
+    }
+
+    .mobile-user-section {
+      padding: $spacing-md;
+      border-bottom: 1px solid $border-color;
+
+      .user-info {
+        margin-bottom: $spacing-md;
+
+        .user-name {
+          display: block;
+          font-weight: 600;
+          color: $text-primary;
+          margin-bottom: $spacing-xs;
+        }
+
+        .user-email {
+          display: block;
+          font-size: 0.875rem;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+}
+

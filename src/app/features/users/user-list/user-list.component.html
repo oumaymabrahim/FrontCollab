@@ -1,0 +1,126 @@
+<div class="users-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Gestion des utilisateurs</h1>
+    <div class="header-actions">
+      <button class="btn btn-primary" routerLink="/admin/users/create">
+        <i class="icon icon-plus"></i>
+        Nouvel utilisateur
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtres -->
+  <div class="filters-section">
+    <div class="filters-row">
+      <div class="search-group">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="applyFilters()"
+          placeholder="Rechercher par nom ou email..."
+          class="search-input"
+        />
+        <i class="icon icon-search search-icon"></i>
+      </div>
+
+      <select
+        [(ngModel)]="selectedRole"
+        (change)="applyFilters()"
+        class="role-select"
+      >
+        <option value="ALL">Tous les rôles</option>
+        <option [value]="Role.ADMIN">Administrateur</option>
+        <option [value]="Role.CHEF_DE_PROJECT">Chef de Projet</option>
+        <option [value]="Role.MEMBRE_EQUIPE">Membre d'équipe</option>
+      </select>
+
+      <button class="btn btn-secondary" (click)="resetFilters()">
+        <i class="icon icon-refresh"></i>
+        Réinitialiser
+      </button>
+    </div>
+
+    <div class="results-info">
+      {{ filteredUsers.length }} utilisateur(s) trouvé(s)
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <app-loading *ngIf="loading" message="Chargement des utilisateurs..."></app-loading>
+
+  <!-- Erreur -->
+  <div class="error-message" *ngIf="error">
+    <i class="icon icon-error"></i>
+    {{ error }}
+  </div>
+
+  <!-- Liste des utilisateurs -->
+  <div class="users-grid" *ngIf="!loading && !error">
+    <div class="user-card" *ngFor="let user of getPaginatedUsers()" [ngClass]="getRoleClass(user.role)">
+      <div class="user-avatar">
+        <i class="icon icon-user"></i>
+      </div>
+
+      <div class="user-info">
+        <h3>{{ user.nom }}</h3>
+        <p class="user-email">{{ user.email }}</p>
+        <span class="user-role" [ngClass]="getRoleClass(user.role)">
+          {{ getRoleLabel(user.role) }}
+        </span>
+      </div>
+
+      <div class="user-actions">
+        <select
+          [value]="user.role"
+          (change)="changeUserRole(user, $any($event.target).value)"
+          class="role-change-select"
+        >
+          <option [value]="Role.ADMIN">Administrateur</option>
+          <option [value]="Role.CHEF_DE_PROJECT">Chef de Projet</option>
+          <option [value]="Role.MEMBRE_EQUIPE">Membre d'équipe</option>
+        </select>
+
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteUser(user)"
+          title="Supprimer l'utilisateur"
+        >
+          <i class="icon icon-delete"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun utilisateur -->
+  <div class="empty-state" *ngIf="!loading && !error && filteredUsers.length === 0">
+    <i class="icon icon-people"></i>
+    <h3>Aucun utilisateur trouvé</h3>
+    <p>Aucun utilisateur ne correspond à vos critères de recherche.</p>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button
+      class="btn btn-secondary"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      <i class="icon icon-chevron-left"></i>
+      Précédent
+    </button>
+
+    <span class="page-info">
+      Page {{ currentPage }} sur {{ totalPages }}
+    </span>
+
+    <button
+      class="btn btn-secondary"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
+      Suivant
+      <i class="icon icon-chevron-right"></i>
+    </button>
+  </div>
+</div>
