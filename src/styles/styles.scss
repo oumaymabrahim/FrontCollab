@@ -1,125 +1,404 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* src/styles/styles.scss */
 @import 'variables';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* Reset et base */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: $background-color;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background: $background-light;
   color: $text-primary;
   line-height: 1.6;
 }
 
-// Utilitaires
-.text-primary { color: $primary-color; }
-.text-secondary { color: $text-secondary; }
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, $primary-purple, $secondary-purple);
+  border-radius: 4px;
+  transition: background $transition-normal;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, $secondary-purple, $light-purple);
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: $primary-purple; }
+.text-secondary { color: $secondary-purple; }
 .text-success { color: $success-color; }
 .text-warning { color: $warning-color; }
 .text-error { color: $error-color; }
+.text-info { color: $info-color; }
+.text-muted { color: $text-muted; }
 
-.btn {
-  padding: $spacing-sm $spacing-md;
-  border-radius: $border-radius-md;
-  border: none;
-  cursor: pointer;
+.bg-primary { background: $primary-purple; }
+.bg-secondary { background: $secondary-purple; }
+.bg-light { background: $background-light; }
+.bg-white { background: $background-white; }
+
+.full-width { width: 100%; }
+.full-height { height: 100%; }
+
+.mt-xs { margin-top: $spacing-xs; }
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-xs { margin-bottom: $spacing-xs; }
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.p-xs { padding: $spacing-xs; }
+.p-sm { padding: $spacing-sm; }
+.p-md { padding: $spacing-md; }
+.p-lg { padding: $spacing-lg; }
+.p-xl { padding: $spacing-xl; }
+
+/* Material Design Overrides */
+.mat-toolbar {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.mat-card {
+  font-family: 'Inter', sans-serif !important;
+  border-radius: $border-radius-md !important;
+  box-shadow: $shadow-sm !important;
+  transition: box-shadow $transition-normal !important;
+}
+
+.mat-card:hover {
+  box-shadow: $shadow-md !important;
+}
+
+.mat-button, .mat-raised-button, .mat-flat-button {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  border-radius: 25px !important;
+  text-transform: none !important;
+  transition: all $transition-normal !important;
+}
+
+.mat-raised-button.mat-primary {
+  background: linear-gradient(45deg, $primary-purple, $secondary-purple) !important;
+  color: white !important;
+}
+
+.mat-raised-button.mat-accent {
+  background: linear-gradient(45deg, $accent-pink, #f06292) !important;
+  color: white !important;
+}
+
+.mat-form-field {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: $border-radius-sm !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-outline-thick {
+  border-color: $primary-purple !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: $primary-purple !important;
+}
+
+/* Table customizations */
+.mat-table {
+  font-family: 'Inter', sans-serif !important;
+  border-radius: $border-radius-md !important;
+  overflow: hidden !important;
+}
+
+.mat-header-row {
+  background: linear-gradient(90deg, $primary-purple, $secondary-purple) !important;
+}
+
+.mat-header-cell {
+  color: white !important;
+  font-weight: 600 !important;
+  border-bottom: none !important;
+}
+
+.mat-row:hover {
+  background-color: $background-light !important;
+}
+
+/* Chip customizations */
+.mat-chip {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  border-radius: 16px !important;
+}
+
+/* Dialog customizations */
+.mat-dialog-container {
+  border-radius: $border-radius-lg !important;
+  overflow: hidden !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Menu customizations */
+.mat-menu-panel {
+  border-radius: $border-radius-md !important;
+  box-shadow: $shadow-lg !important;
+}
+
+/* Snackbar customizations */
+.mat-snack-bar-container {
+  border-radius: $border-radius-sm !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Progress bar customizations */
+.mat-progress-bar-fill::after {
+  background: linear-gradient(45deg, $primary-purple, $secondary-purple) !important;
+}
+
+/* Paginator customizations */
+.mat-paginator {
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 0 0 $border-radius-md $border-radius-md !important;
+}
+
+/* Selection customizations */
+.mat-checkbox-checked .mat-checkbox-background {
+  background-color: $primary-purple !important;
+}
+
+.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $primary-purple !important;
+}
+
+.mat-radio-checked .mat-radio-inner-circle {
+  background-color: $primary-purple !important;
+}
+
+/* Responsive utilities */
+@media (max-width: 599px) {
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 600px) {
+  .show-mobile { display: none !important; }
+}
+
+@media (max-width: 959px) {
+  .hide-tablet { display: none !important; }
+}
+
+@media (min-width: 960px) {
+  .show-tablet { display: none !important; }
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Loading states */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+
+/* Custom gradients */
+.gradient-primary {
+  background: linear-gradient(135deg, $primary-purple, $secondary-purple);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, $accent-pink, #f06292);
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, $success-color, #66bb6a);
+}
+
+.gradient-warning {
+  background: linear-gradient(135deg, $warning-color, #ffb74d);
+}
+
+/* Error pages */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  color: $text-muted;
+}
+
+.error-page .error-icon {
+  font-size: 4rem;
+  margin-bottom: $spacing-lg;
+  color: $primary-purple;
+}
+
+.error-page .error-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: $spacing-sm;
+  color: $text-primary;
+}
+
+.error-page .error-message {
+  font-size: 1rem;
+  margin-bottom: $spacing-lg;
+}
+
+/* Custom card styles */
+.card-hover {
+  transition: all $transition-normal;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: $shadow-lg !important;
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 500;
-  transition: all 0.2s;
-
-  &.btn-primary {
-    background-color: $primary-color;
-    color: white;
-
-    &:hover {
-      background-color: $primary-dark;
-    }
-  }
-
-  &.btn-secondary {
-    background-color: $text-secondary;
-    color: white;
-
-    &:hover {
-      background-color: darken($text-secondary, 10%);
-    }
-  }
 }
 
-.card {
-  background: $surface-color;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-md;
-  padding: $spacing-lg;
-  margin-bottom: $spacing-md;
-}
-
-// Classes utilitaires pour les rôles
-.role-admin { border-left: 4px solid $error-color; }
-.role-chef { border-left: 4px solid $warning-color; }
-.role-membre { border-left: 4px solid $info-color; }
-
-// Statuts des tâches
-.statut-en-attente {
-  background-color: rgba($warning-color, 0.1);
-  color: $warning-color;
-}
-.statut-en-cours {
-  background-color: rgba($info-color, 0.1);
-  color: $info-color;
-}
-.statut-terminee {
-  background-color: rgba($success-color, 0.1);
+.status-success {
+  background: rgba($success-color, 0.1);
   color: $success-color;
 }
 
-// Responsive
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 $spacing-md;
+.status-warning {
+  background: rgba($warning-color, 0.1);
+  color: $warning-color;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 0 $spacing-sm;
+.status-error {
+  background: rgba($error-color, 0.1);
+  color: $error-color;
+}
+
+.status-info {
+  background: rgba($info-color, 0.1);
+  color: $info-color;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 10px;
+  color: white;
+  background: $primary-purple;
+}
+
+.badge.badge-accent { background: $accent-pink; }
+.badge.badge-success { background: $success-color; }
+.badge.badge-warning { background: $warning-color; }
+.badge.badge-error { background: $error-color; }
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles */
+.mat-button:focus,
+.mat-raised-button:focus,
+.mat-icon-button:focus {
+  outline: 2px solid $primary-purple;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .mat-sidenav-container {
+    background: white !important;
+  }
+
+  .page-header {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
   }
 }
-
-
-  // Classes d'icônes utilisant Feather Icons
-.icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-
-  // Icônes communes
-  &.icon-dashboard::before { content: "📊"; }
-  &.icon-people::before { content: "👥"; }
-  &.icon-folder::before { content: "📁"; }
-  &.icon-task::before { content: "✓"; }
-  &.icon-user::before { content: "👤"; }
-  &.icon-plus::before { content: "+"; }
-  &.icon-search::before { content: "🔍"; }
-  &.icon-refresh::before { content: "🔄"; }
-  &.icon-delete::before { content: "🗑️"; }
-  &.icon-edit::before { content: "✏️"; }
-  &.icon-eye::before { content: "👁️"; }
-  &.icon-calendar::before { content: "📅"; }
-  &.icon-clock::before { content: "⏰"; }
-  &.icon-money::before { content: "💰"; }
-  &.icon-check::before { content: "✅"; }
-  &.icon-error::before { content: "❌"; }
-  &.icon-info::before { content: "ℹ️"; }
-  &.icon-star::before { content: "⭐"; }
-  &.icon-menu::before { content: "☰"; }
-  &.icon-close::before { content: "✕"; }
-  &.icon-logout::before { content: "🚪"; }
-  &.icon-chevron-left::before { content: "◀"; }
-  &.icon-chevron-right::before { content: "▶"; }
-  &.icon-archive::before { content: "📦"; }
-}
-

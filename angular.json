@@ -25,12 +25,15 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/variables.scss",
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles"]},
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -91,6 +94,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/variables.scss",
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles/styles.scss"
             ],

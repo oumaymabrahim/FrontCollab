@@ -1,83 +1,50 @@
+// app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
-
-// Layouts
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ChefLayoutComponent } from './layouts/chef-layout/chef-layout.component';
-import { MembreLayoutComponent } from './layouts/membre-layout/membre-layout.component';
+import { Role } from './core/models/user.model';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/auth/login',
+    pathMatch: 'full'
+  },
   {
     path: 'auth',
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'admin',
-    component: AdminLayoutComponent,
+    component: LayoutComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['ADMIN'] },
-    children: [
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'users',
-        loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule)
-      },
-      {
-        path: 'projets',
-        loadChildren: () => import('./features/projets/projets.module').then(m => m.ProjetsModule)
-      },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-    ]
+    data: { roles: [Role.ADMIN] },
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'chef',
-    component: ChefLayoutComponent,
+    component: LayoutComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['CHEF_DE_PROJECT'] },
-    children: [
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'projets',
-        loadChildren: () => import('./features/projets/projets.module').then(m => m.ProjetsModule)
-      },
-      {
-        path: 'taches',
-        loadChildren: () => import('./features/taches/taches.module').then(m => m.TachesModule)
-      },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-    ]
+    data: { roles: [Role.CHEF_DE_PROJECT] },
+    loadChildren: () => import('./features/chef/chef.module').then(m => m.ChefModule)
   },
   {
     path: 'membre',
-    component: MembreLayoutComponent,
+    component: LayoutComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['MEMBRE_EQUIPE'] },
-    children: [
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'mes-taches',
-        loadChildren: () => import('./features/taches/taches.module').then(m => m.TachesModule)
-      },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-    ]
+    data: { roles: [Role.MEMBRE_EQUIPE] },
+    loadChildren: () => import('./features/membre/membre.module').then(m => m.MembreModule)
   },
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/auth/login' }
+  {
+    path: '**',
+    redirectTo: '/auth/login'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

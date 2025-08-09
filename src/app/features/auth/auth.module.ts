@@ -1,26 +1,33 @@
 // features/auth/auth.module.ts
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from '../../shared/shared.module';
 
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
-// Import du composant loading partagé
-import { LoadingComponent } from '../../shared/components/loading/loading.component';
+const routes: Routes = [
+  {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
+    ]
+  }
+];
 
 @NgModule({
   declarations: [
+    AuthLayoutComponent,
     LoginComponent,
-    RegisterComponent,
-
+    RegisterComponent
   ],
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    AuthRoutingModule,
-    LoadingComponent
+    SharedModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class AuthModule { }
