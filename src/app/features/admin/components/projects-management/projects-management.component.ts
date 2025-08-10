@@ -226,7 +226,7 @@ export class ProjectsManagementComponent implements OnInit {
     { key: 'nom', label: 'Nom du Projet', type: 'text', sortable: true },
     { key: 'description', label: 'Description', type: 'text', width: '200px' },
     { key: 'dateCreation', label: 'Date Création', type: 'date', sortable: true, width: '130px' },
-    { key: 'dateEcheance', label: 'Date Échéance', type: 'date', sortable: true, width: '130px' },
+    { key: 'dateEchéance', label: 'Date Échéance', type: 'date', sortable: true, width: '130px' },
     { key: 'statut', label: 'Statut', type: 'status', sortable: true, width: '120px' },
     { key: 'budget', label: 'Budget', type: 'text', sortable: true, width: '100px' },
     { key: 'actions', label: 'Actions', type: 'actions', width: '150px' }
@@ -489,7 +489,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
       justify-content: space-between;
       align-items: center;
       padding: 20px 24px 10px;
-      background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+      background: linear-gradient(90deg, #9a5b1b, #8e24aa);
       color: white;
       margin: -24px -24px 0 -24px;
     }
@@ -519,7 +519,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     }
 
     .info-section h3 {
-      color: #6a1b9a;
+      color: #d189dd;
       font-size: 1.1rem;
       font-weight: 600;
       margin: 0 0 15px 0;
@@ -536,14 +536,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
     .label {
       font-weight: 600;
-      color: #6a1b9a;
+      color: #cb57e1;
       min-width: 100px;
       margin-right: 15px;
     }
 
     .value {
       flex: 1;
-      color: #333;
+      color: rgb(228, 208, 208);
       word-break: break-word;
     }
 

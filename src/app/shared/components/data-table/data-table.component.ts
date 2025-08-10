@@ -186,15 +186,15 @@ export interface TableAction {
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(106, 27, 154, 0.15);
+      box-shadow: 0 8px 32px rgb(215, 109, 234);
       margin-bottom: 20px;
-      border: 1px solid rgba(106, 27, 154, 0.1);
+      border: 1px solid rgba(191, 101, 246, 0.1);
     }
 
     .table-toolbar {
       padding: 20px 24px;
-      background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-      border-bottom: 2px solid #e1bee7;
+      background: linear-gradient(135deg, #480c53 0%, #ed5959 100%);
+      border-bottom: 2px solid #d5ced1;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -204,7 +204,7 @@ export interface TableAction {
 
     .table-title {
       margin: 0;
-      color: #6a1b9a;
+      color: #8638b5;
       font-weight: 700;
       font-size: 1.3rem;
       display: flex;
@@ -213,7 +213,7 @@ export interface TableAction {
     }
 
     .table-title::before {
-      content: "📊";
+      content: "";
       font-size: 1.5rem;
     }
 
@@ -233,7 +233,7 @@ export interface TableAction {
     }
 
     .search-field ::ng-deep .mat-form-field-outline {
-      border-color: #e1bee7 !important;
+      border-color: #333333 !important;
       border-width: 2px !important;
     }
 
@@ -243,7 +243,7 @@ export interface TableAction {
     }
 
     .search-field ::ng-deep .mat-form-field-label {
-      color: #8e24aa !important;
+      color: #333333 !important;
       font-weight: 500 !important;
     }
 
@@ -251,12 +251,12 @@ export interface TableAction {
       position: relative;
       overflow: auto;
       max-height: 700px;
-      background: white;
+      background: #cc8fd9;
     }
 
     .data-table {
       width: 100%;
-      background: white;
+      background: #d189dd;
       font-family: 'Inter', sans-serif;
     }
 
@@ -267,7 +267,7 @@ export interface TableAction {
 
     /* CORRECTION MAJEURE: Headers visibles avec dégradé moderne */
     ::ng-deep .mat-header-cell {
-      background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%) !important;
+      background: linear-gradient(135deg, #a144d9 0%, #8e24aa 50%, #ab47bc 100%) !important;
       color: white !important;
       font-weight: 700 !important;
       font-size: 0.95rem !important;
@@ -286,7 +286,7 @@ export interface TableAction {
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
       pointer-events: none;
     }
 
@@ -324,7 +324,7 @@ export interface TableAction {
     ::ng-deep .mat-row.selected-row {
       background: linear-gradient(90deg, #e1bee7, #f3e5f5) !important;
       border-left: 4px solid #6a1b9a;
-      box-shadow: 0 4px 16px rgba(106, 27, 154, 0.2);
+      box-shadow: 0 4px 16px rgb(209, 137, 221);
     }
 
     /* Colonnes spécifiques */
@@ -335,7 +335,7 @@ export interface TableAction {
     }
 
     ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-      background-color: #6a1b9a !important;
+      background-color: #b46edf !important;
     }
 
     /* Styles des cellules par type */
@@ -395,7 +395,7 @@ export interface TableAction {
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transition: left 0.5s ease;
     }
 
@@ -478,7 +478,7 @@ export interface TableAction {
 
     ::ng-deep .mat-paginator-page-size-label,
     ::ng-deep .mat-paginator-range-label {
-      color: #6a1b9a !important;
+      color: #e7bece !important;
       font-weight: 600 !important;
     }
 
@@ -486,18 +486,30 @@ export interface TableAction {
     ::ng-deep .mat-paginator-navigation-next,
     ::ng-deep .mat-paginator-navigation-first,
     ::ng-deep .mat-paginator-navigation-last {
-      color: #6a1b9a !important;
+      color: #b975e3 !important;
     }
 
     /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .data-table-container {
@@ -551,6 +563,7 @@ export interface TableAction {
         min-width: 600px;
       }
     }
+
   `]
 })
 export class DataTableComponent implements OnInit, OnChanges {

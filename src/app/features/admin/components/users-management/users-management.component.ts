@@ -303,7 +303,7 @@ export class UsersManagementComponent implements OnInit {
   viewUser(user: User): void {
     // Implémentation pour voir les détails
     this.dialog.open(UserDetailsDialogComponent, {
-      width: '500px',
+      width: '900px',
       data: user
     });
   }
@@ -401,7 +401,7 @@ export class UsersManagementComponent implements OnInit {
   `,
   styles: [`
     .user-details-dialog {
-      min-width: 450px;
+     min-width: 450px;
     }
 
     .dialog-header {
@@ -409,7 +409,7 @@ export class UsersManagementComponent implements OnInit {
       justify-content: space-between;
       align-items: center;
       padding: 20px 24px 10px;
-      background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+      background: linear-gradient(90deg, #9a411b, #8e24aa);
       color: white;
       margin: -24px -24px 0 -24px;
     }
@@ -456,14 +456,14 @@ export class UsersManagementComponent implements OnInit {
 
     .label {
       font-weight: 600;
-      color: #6a1b9a;
+      color: #cab0da;
       min-width: 80px;
       margin-right: 15px;
     }
 
     .value {
       flex: 1;
-      color: #333;
+      color: #e7bece;
     }
 
     .dialog-actions {
